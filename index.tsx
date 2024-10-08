@@ -63,6 +63,7 @@ export type ScrollPickerProps<ItemT extends string | number> = {
   // tried using ComponentType<ScrollViewProps & { ref: React.RefObject<ScrollView> }>
   // but ScrollView component from react-native-gesture=handler is not compatible with this.
   scrollViewComponent?: any;
+  borderMode?: 'left' | 'right'
 };
 
 export type ScrollPickerHandle = {
@@ -232,10 +233,12 @@ const ScrollPicker: { <ItemT extends string | number>(props: ScrollPickerProps<I
     top: (wrapperHeight - itemHeight) / 2,
     height: itemHeight,
     width: highlightWidth,
-    borderTopColor: highlightColor,
-    borderBottomColor: highlightColor,
-    borderTopWidth: highlightBorderWidth,
-    borderBottomWidth: highlightBorderWidth,
+    borderColor: highlightColor,
+    borderTopLeftRadius: props.borderMode == 'left' ? 50 : 0,
+    borderBottomLeftRadius: props.borderMode == 'left' ? 50 : 0,
+    borderTopRightRadius: props.borderMode == 'right' ? 50 : 0,
+    borderBottomRightRadius: props.borderMode == 'right' ? 50 : 0,
+    backgroundColor: highlightColor
   };
 
   const CustomScrollViewComponent = scrollViewComponent || ScrollView;
